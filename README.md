@@ -1,5 +1,8 @@
 ![banner](docs/assets/banner.png)
 
+
+> **Status (2026-09-20): historical.** The model line has moved on. For current single-node numbers on this hardware see `dell-pro-max-gb10-qwen3.8-27b` and `dell-pro-max-gb10-qwen3.8-27b-mtp-k-sweep`; for the two-node production engine see `dell-pro-max-gb10-qwen3.8-flash-next-1m-context`. The measurements below are kept as a record of the method and of what this model did at the time.
+
 # Qwen3.6-35B-A3B NVFP4 on one Dell Pro Max with GB10 — MTP-3 speculative decoding, marlin MoE backend, flashinfer, fp8 KV
 
 > A measured test of whether NVFP4-quantized Qwen3.6-35B-A3B, served on a single Dell Pro Max with GB10 (Grace CPU, aarch64) with the community MTP-3 speculative-decoding recipe plus a marlin MoE backend, flashinfer attention and fp8 KV cache, could turn a bandwidth-bound single-node box into a usable code decoder. The nvidia-official NVFP4 weights with MTP-3 raised code decode decisively over the no-MTP code baseline (+44.9% to +50.6%, 113.6 / 118.1 vs 78.4 tok/s, single stream); the MTP mean acceptance length stayed healthy at 2.51. Unsloth Fast quantization was a dead end for this machine, and a dense 27B NVFP4 model decoded at about 20 tok/s single stream in our runs, which is why the A3B MoE was locked in. This recipe served as our single-node workhorse from mid-July to mid-August 2026 before we moved to Qwen3.8-27B. A pre-deployment prediction (~103 tok/s from the community MTP-3 recipe) sits next to our measured code throughput and is reported both ways in the Results section.
